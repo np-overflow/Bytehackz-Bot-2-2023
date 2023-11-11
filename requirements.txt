@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-discord.py = 2.3.2
-python-dotenv = 1.0.0
-APScheduler = 4.0.0a3
-pytz = 2023.3.post1
-=======
 discord.py~=2.3.2
 python-dotenv~=1.0.0
 APScheduler~=4.0.0a3
 pytz~=2023.3.post1
->>>>>>> 7b3e84c52b73708d806b30b1e84a15e572f4795e
