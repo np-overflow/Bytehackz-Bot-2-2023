@@ -1,2 +1,2 @@
-# Bytehackz-Bot-Rewrite-2023
-Rewriting the ByteHackz bot using Nextcord
+# Bytehackz-Bot-2-2023
+Adding hacking fun stuff 
