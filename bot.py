@@ -71,14 +71,6 @@ dt_fmt = '%Y-%m-%d %H:%M:%S'
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
-# Define intents
-# intents = discord.Intents.default()
-# intents.members = True
-# intents.message_content = True
-# intents.typing = True
-# intents.presences = False
-# intents.guilds = True
-
 # activity = discord.Activity(type=discord.ActivityType.watching, name="Byte®Hackz")
 # client = discord.Client(intents=intents,
 #                         activity=activity,
@@ -89,14 +81,6 @@ tree = discord.app_commands.CommandTree(client)
 
 
 @client.event
-# async def on_ready():
-#     await tree.sync()
-#     print(f"Logged in as: {client.user}")
-#     print(f"Servers: {len(client.guilds)}")
-#     print(f"I am in: {[i.name for i in client.guilds]}")
-#     print("Bot is online.")
-
-
 async def load():
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
@@ -113,7 +97,7 @@ async def goodbye(interaction: discord.Interaction, member:discord.Member):
     await interaction.response.send_message(f"Goodbye {member.mention}, have a nice day!")
 
 
-@tree.command(description="Sends the bot's latency.")
+@tree.command(name="ping", description="Sends the bot's latency.")
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(f"Pong! Latency is {client.latency}ms", ephemeral=True)
 
@@ -169,7 +153,7 @@ async def on_message(message):
 
 
 
-@tree.command()
+@tree.command(name="joke", description="This is a joke.")
 async def joke(interaction: discord.Interaction):
     jokeurl = "https://dad-jokes.p.rapidapi.com/random/joke"
 
