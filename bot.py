@@ -142,7 +142,7 @@ async def on_message(message):
         embed.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/1169297244500009022/1169297512650248282/images.png?ex=6554e42b&is=65426f2b&hm=bae43ae3bc83d5e8dae7e3239a874c10804f3a521fdaf52eb91aded7b0ddd770&")
         embed.set_footer(text="Overflow Byte®Hackz 2023 Organising Team",
-                         icon_url='https://cdn.discordapp.com/attachments/1169297244500009022/1169837618658291732/logo_white_bg.png?ex=6556db2e&is=6544662e&hm=39691fd6451a1abbdb6a22826c07cb19d6f882aaf6da67abf75d24d9ed565737&')
+                         icon_url=OVERFLOW_LOGO)
         await message.channel.send(embed=embed)
 
     elif 'butt' in message.content or 'ass' in message.content:
@@ -164,7 +164,7 @@ async def on_message(message):
                          url="https://www.instagram.com/npoverflow/",
                          icon_url=message.author.avatar)
         embed.set_footer(text=f"{message.author.id}",
-                         icon_url="https://cdn.discordapp.com/attachments/1169297244500009022/1171721561368186880/bytehackz2023logo_square.jpg?ex=655db5bd&is=654b40bd&hm=f003a0cfe4d7d905f580d8b37a31181fdf5cc1d44f5b114395c7ab6bb62ae108&")
+                         icon_url=BYTEHACKZ_BANNER)
         await message.channel.send(embed=embed)
 
 
