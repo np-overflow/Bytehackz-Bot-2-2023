@@ -29,7 +29,8 @@ class aclient(discord.Client):
         intents.presences = False
         intents.guilds = True
         activity = discord.Activity(type=discord.ActivityType.watching, name="Byte®Hackz")
-        super().__init__(intents=intents, activity=activity)
+        status=discord.Status.idle
+        super().__init__(intents=intents, activity=activity, status=status)
         self.synced = False
 
     async def on_ready(self):
