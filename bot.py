@@ -167,19 +167,29 @@ async def joke(interaction: discord.Interaction):
 
     if response.status_code == 200:
         joke_data = response.json()
-        setup = joke_data.get('setup', '')
-        punchline = joke_data.get('punchline', '')
+        # setup = joke_data.get('setup', '')
+        # punchline = joke_data.get('punchline', '')
+        # Accessing the 'setup' and 'punchline' values
+        setup = joke_data['body'][0]['setup']
+        punchline = joke_data['body'][0]['punchline']
 
         # Debugging: Print the contents of the joke_data dictionary
         print("joke_data:", joke_data)
 
         if setup and punchline:
-            await interaction.response.send_message(f"Here's a joke:\n{setup}\n{punchline}")
+            embed = discord.Embed(title="Here's a joke:",
+                                  description=f"{setup}\n\n{punchline}",
+                                  color=discord.Color.blurple())
+            embed.set_author(name=interaction.user.name,
+                             url="https://www.instagram.com/npoverflow/",
+                             icon_url=interaction.user.avatar)
+            embed.set_footer(text=f"{interaction.user.id}",
+                             icon_url="https://cdn.discordapp.com/attachments/1169297244500009022/1171721561368186880/bytehackz2023logo_square.jpg?ex=655db5bd&is=654b40bd&hm=f003a0cfe4d7d905f580d8b37a31181fdf5cc1d44f5b114395c7ab6bb62ae108&")
+            await interaction.response.send_message(interaction.user.mention, embed=embed)
         else:
             await interaction.response.send_message("The joke data is incomplete.")
     else:
         await interaction.response.send_message("Sorry, I couldn't fetch a joke this time.")
-
 
 @client.event
 async def on_message_edit(before, after):
