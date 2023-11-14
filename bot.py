@@ -11,7 +11,7 @@ from discord.ext.commands import Cog, Command, Group
 from datetime import datetime, timezone, timedelta
 
 from utils.config import (TOKEN, PGUILD, BGUILD, JOIN_CHANNEL, BOT_DEV_ROLE,
-                          DAD_JOKES_API_KEY, LOGGING_LEVEL, LOG_CHANNEL, OVERFLOW_LOGO,
+                          DAD_JOKES_API_KEY, NINJAS_API_KEY, LOGGING_LEVEL, LOG_CHANNEL, OVERFLOW_LOGO,
                           BYTEHACKZ_BANNER, BYTEHACKZ_SQUARE)
 
 import requests
@@ -167,14 +167,12 @@ async def joke(interaction: discord.Interaction):
 
     if response.status_code == 200:
         joke_data = response.json()
-        # setup = joke_data.get('setup', '')
-        # punchline = joke_data.get('punchline', '')
         # Accessing the 'setup' and 'punchline' values
         setup = joke_data['body'][0]['setup']
         punchline = joke_data['body'][0]['punchline']
 
         # Debugging: Print the contents of the joke_data dictionary
-        print("joke_data:", joke_data)
+        #print("joke_data:", joke_data)
 
         if setup and punchline:
             embed = discord.Embed(title="Here's a joke:",
@@ -190,6 +188,42 @@ async def joke(interaction: discord.Interaction):
             await interaction.response.send_message("The joke data is incomplete.")
     else:
         await interaction.response.send_message("Sorry, I couldn't fetch a joke this time.")
+
+
+@tree.command(name="more_jokes", description="A different API lol")
+async def more_jokes(interaction: discord.Interaction):
+    url = "https://jokes-by-api-ninjas.p.rapidapi.com/v1/jokes"
+
+    headers = {
+        "X-RapidAPI-Key": NINJAS_API_KEY,
+        "X-RapidAPI-Host": "jokes-by-api-ninjas.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        joke_data = response.json()
+        joke = joke_data[0]['joke']
+
+        # Debugging: Print the contents of the joke_data dictionary
+        #print("joke_data:", joke_data)
+
+        if joke:
+            embed = discord.Embed(title="Here's a joke:",
+                                  description=f"{joke}",
+                                  color=discord.Color.blurple())
+            embed.set_author(name=interaction.user.name,
+                             url="https://www.instagram.com/npoverflow/",
+                             icon_url=interaction.user.avatar)
+            embed.set_footer(text=f"{interaction.user.id}",
+                             icon_url="https://cdn.discordapp.com/attachments/1169297244500009022/1171721561368186880/bytehackz2023logo_square.jpg?ex=655db5bd&is=654b40bd&hm=f003a0cfe4d7d905f580d8b37a31181fdf5cc1d44f5b114395c7ab6bb62ae108&")
+            await interaction.response.send_message(interaction.user.mention, embed=embed)
+        else:
+            await interaction.response.send_message("The joke data is incomplete.")
+    else:
+        await interaction.response.send_message("Sorry, I couldn't fetch a joke this time.")
+
+
 
 @client.event
 async def on_message_edit(before, after):
