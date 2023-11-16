@@ -241,6 +241,24 @@ async def announce(interaction: discord.Interaction,
                      icon_url='https://cdn.discordapp.com/attachments/1169297244500009022/1169837618658291732/logo_white_bg.png?ex=6556db2e&is=6544662e&hm=39691fd6451a1abbdb6a22826c07cb19d6f882aaf6da67abf75d24d9ed565737&')
     await channel.send(role.mention, embed=embed)
     await interaction.response.send_message("Success!")
+    
+    
+@tree.command(name="general_announce", description="announce a message in any channel without pinging")
+async def announce(interaction: discord.Interaction,
+                   channel: discord.TextChannel,
+                   subject: str,
+                   message: str):
+    embed = discord.Embed(title= subject,
+                          description= message,
+                          color=discord.Color.orange())
+    embed.set_author(name=interaction.user.name,
+                     url="https://www.instagram.com/npoverflow/",
+                     icon_url=interaction.user.avatar)
+    embed.set_thumbnail(url= BYTEHACKZ_SQUARE)
+    embed.set_footer(text="Overflow Byte®Hackz 2023 Organising Team",
+                     icon_url='https://cdn.discordapp.com/attachments/1169297244500009022/1169837618658291732/logo_white_bg.png?ex=6556db2e&is=6544662e&hm=39691fd6451a1abbdb6a22826c07cb19d6f882aaf6da67abf75d24d9ed565737&')
+    await channel.send(embed=embed)
+    await interaction.response.send_message("Success!")
 
 
 @client.event
