@@ -238,7 +238,7 @@ async def announce(interaction: discord.Interaction,
                      icon_url=interaction.user.avatar)
     embed.set_thumbnail(url= BYTEHACKZ_SQUARE)
     embed.set_footer(text="Overflow Byte®Hackz 2023 Organising Team",
-                     icon_url="https://cdn.discordapp.com/attachments/1169297244500009022/1171721561368186880/bytehackz2023logo_square.jpg?ex=655db5bd&is=654b40bd&hm=f003a0cfe4d7d905f580d8b37a31181fdf5cc1d44f5b114395c7ab6bb62ae108&")
+                     icon_url='https://cdn.discordapp.com/attachments/1169297244500009022/1169837618658291732/logo_white_bg.png?ex=6556db2e&is=6544662e&hm=39691fd6451a1abbdb6a22826c07cb19d6f882aaf6da67abf75d24d9ed565737&')
     await channel.send(role.mention, embed=embed)
     await interaction.response.send_message("Success!")
 
