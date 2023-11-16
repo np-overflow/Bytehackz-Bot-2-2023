@@ -224,6 +224,24 @@ async def more_jokes(interaction: discord.Interaction):
         await interaction.response.send_message("Sorry, I couldn't fetch a joke this time.")
 
 
+@tree.command(name="announce", description="announce a message in any channel while pinging a role")
+async def announce(interaction: discord.Interaction,
+                   role: discord.Role,
+                   channel: discord.TextChannel,
+                   subject: str,
+                   message: str):
+    embed = discord.Embed(title= subject,
+                          description= message,
+                          color=discord.Color.orange())
+    embed.set_author(name=interaction.user.name,
+                     url="https://www.instagram.com/npoverflow/",
+                     icon_url=interaction.user.avatar)
+    embed.set_thumbnail(url= BYTEHACKZ_SQUARE)
+    embed.set_footer(text="Overflow Byte®Hackz 2023 Organising Team",
+                     icon_url="https://cdn.discordapp.com/attachments/1169297244500009022/1171721561368186880/bytehackz2023logo_square.jpg?ex=655db5bd&is=654b40bd&hm=f003a0cfe4d7d905f580d8b37a31181fdf5cc1d44f5b114395c7ab6bb62ae108&")
+    await channel.send(role.mention, embed=embed)
+    await interaction.response.send_message("Success!")
+
 
 @client.event
 async def on_message_edit(before, after):
